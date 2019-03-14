@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div
+  className="sc-bdVaJa hLyHSZ"
+>
+  <div
+    className="jumbotron"
+  >
+    <h1>
+      Movie DB App
+    </h1>
+    <p>
+      This is an amaizing movie database application.
+    </p>
+    <p>
+      Also this app will teach you how to write unit tests.
+    </p>
+  </div>
+</div>
+`;
