@@ -7,7 +7,7 @@ export const turnOnLoader = (action: string): TurnOnLoader => ({
   payload: action.replace('_REQUEST', '')
 });
 
-export const turnOfLoader = (action: string): TurnOffLoader => ({
+export const turnOffLoader = (action: string): TurnOffLoader => ({
   type: LOADER_ACTIONS.TURN_OFF_LOADER,
   payload: action.replace('_SUCCESS', '').replace('_FAILIRE', '')
 });

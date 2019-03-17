@@ -8,7 +8,7 @@ export const isLoading = (state: LoaderState, actions: string[], defaultValue: b
     if (state.byAction[action]) {
       isLoadingValue = true
     } else if (state.byAction[action] === false) {
-      isLoadingValue = isLoadingValue || false
+      isLoadingValue = (isLoadingValue || false)
     }
   })
   return isLoadingValue === undefined ? defaultValue : isLoadingValue;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should match snapshout when h2 is sent 1`] = `
+<h2
+  className="sc-bdVaJa lnRlpM"
+>
+  Test title
+</h2>
+`;
+
+exports[`Should match snapshout with default h1 1`] = `
+<h1
+  className="sc-bdVaJa lnRlpM"
+>
+  Test title
+</h1>
+`;

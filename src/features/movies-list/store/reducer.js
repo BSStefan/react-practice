@@ -2,7 +2,7 @@
 import { MOVIE_LIST_ACTIONS } from "./types";
 import type { MovieListState, MovieListActions } from './types';
 
-const initialState = {
+export const initialState = {
   popularMovies: {
     page: 0,
     total_results: 0,

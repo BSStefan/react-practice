@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should match snapshout 1`] = `
+Array [
+  <h1
+    className="sc-bdVaJa lnRlpM"
+  >
+    Test title
+  </h1>,
+  <div>
+    Test
+  </div>,
+]
+`;

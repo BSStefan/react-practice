@@ -1,5 +1,5 @@
 // @flow
-import { turnOnLoader, turnOfLoader } from './actions';
+import { turnOnLoader, turnOffLoader } from './actions';
 import type { Middleware, Dispatch } from 'redux';
 import type { LoaderActions } from './types';
 
@@ -9,7 +9,7 @@ export const setLoaderValue: Middleware<any, any, any> = ({ dispatch }: { dispat
       if (action.type.includes('REQUEST')) {
         dispatch(turnOnLoader(action.type))
       } else if (action.type.includes('SUCCESS') || action.type.includes('FAILURE'))
-        dispatch(turnOfLoader(action.type))
+        dispatch(turnOffLoader(action.type))
 
       return next(action)
     }

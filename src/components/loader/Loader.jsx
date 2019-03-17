@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import Loader from 'react-loader-spinner';
+import LoaderComponent from 'react-loader-spinner';
 import styled from 'styled-components';
 import { brand } from '../../styles/colors';
 
-const CustomLoader = (props: {}) => (
+const Loader = (props: {}) => (
   <StyledLoader>
-    <Loader
+    <LoaderComponent
       type="ThreeDots"
       color={brand}
       height="100"
@@ -21,4 +21,4 @@ const StyledLoader = styled.div`
   text-align: center;
 `
 
-export default CustomLoader;
+export default Loader;

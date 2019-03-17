@@ -22,7 +22,7 @@ type Props = {
   searchMovies: (query: QuerySearch) => void
 }
 
-class PopularMoviesContainer extends React.Component<Props> {
+export class PopularMoviesContainer extends React.Component<Props> {
 
   componentDidMount() {
     this.props.fetchPopularMovieList();
@@ -39,12 +39,12 @@ class PopularMoviesContainer extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State): any => ({
+export const mapStateToProps = (state: State): any => ({
   popularMovies: state.moviesList.popularMovies,
   isLoading: isLoading(state.loaders, [MOVIE_LIST_ACTIONS.FETCH_POPULAR_MOVIES_REQUEST])
 })
 
-const mapDispatchToProps = (dipatch: Dispatch<any>) => (
+export const mapDispatchToProps = (dipatch: Dispatch<any>) => (
   bindActionCreators({
     fetchPopularMovieList,
     searchMovies

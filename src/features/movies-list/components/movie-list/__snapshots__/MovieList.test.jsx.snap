@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should match snapshot 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-lg-3 col-sm-6 col-12"
+  >
+    <div
+      className="sc-bdVaJa hniPbm card"
+      id={123}
+    >
+      <img
+        className="card-img-top"
+        src="https://image.tmdb.org/t/p/w185_and_h278_bestv2http://test.com"
+      />
+      <div
+        className="card-body"
+      >
+        <div
+          className="card-title h5"
+        >
+          Movie title
+        </div>
+        <p
+          className="card-text"
+        >
+          Test test
+        </p>
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          type="button"
+        >
+          View Movie
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

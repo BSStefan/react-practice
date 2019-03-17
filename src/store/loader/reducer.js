@@ -3,7 +3,7 @@ import { LOADER_ACTIONS } from './types';
 import type { LoaderActions, LoaderState } from './types';
 import type { Reducer } from 'redux';
 
-const initialState: LoaderState = {
+export const initialState: LoaderState = {
   byAction: {}
 }
 
