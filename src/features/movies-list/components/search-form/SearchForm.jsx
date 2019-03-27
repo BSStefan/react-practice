@@ -36,8 +36,13 @@ class SearchForm extends React.Component<Props, State> {
   }
 
   handleSearch(event: SyntheticEvent<any>) {
+    const { query } = this.state
     event.preventDefault();
-    this.props.handleSearch({ query: this.state.query });
+    if (query) {
+      this.props.handleSearch({ query });
+    } else {
+      this.props.resetSearch();
+    }
   }
 
   render() {
@@ -53,8 +58,8 @@ class SearchForm extends React.Component<Props, State> {
             onChange={this.handleChange}
           />
           <InputGroup.Append>
-            {query !== '' ? <Button variant="outline-secondary" onClick={this.resetSearch}>X</Button> : null}
-            <Button variant="outline-secondary" onClick={this.handleSearch} type="submit">Search</Button>
+            {query !== '' ? <Button id="reset-search" variant="outline-secondary" onClick={this.resetSearch}>X</Button> : null}
+            <Button id="confirm-search" variant="outline-secondary" onClick={this.handleSearch} type="submit">Search</Button>
           </InputGroup.Append>
         </StyledInputGroupe>
       </Form>

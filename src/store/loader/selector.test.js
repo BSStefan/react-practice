@@ -11,13 +11,11 @@ it('Should return true when do not find value and default is set to true', () =>
 it('Should return false when do not find value and default is set to false', () => {
   expect(isLoading(initialState, ['FETCH_MOVIE1_REQUEST'], false)).toBe(false);
 })
-
-// comment this to show branch coverage
 it('Should return true when do not find value and default is not set', () => {
   expect(isLoading(initialState, ['FETCH_MOVIE1_REQUEST'])).toBe(true);
 })
 
-it('Should return true when when action is found and value is true', () => {
+it('Should return true when when action is found and default value is true', () => {
   expect(isLoading(initialStateWithTrueAction, ['FETCH_MOVIE1_REQUEST'], true)).toBe(true);
 })
 

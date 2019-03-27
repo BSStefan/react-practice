@@ -13,14 +13,6 @@ import {
 import { fakeMovie } from '../../../utils/faker';
 import { MOVIE_LIST_ACTIONS } from './types';
 
-// mock axios instance
-var mock = new MockAdapter(axios);
-
-// mock store
-const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
-const store = mockStore({});
-
 const defaultSentData = {
   page: 1,
   total_results: 100,
@@ -32,7 +24,6 @@ const defaultSentData = {
 }
 
 describe('formatPopularMovieList()', () => {
-
   const defaultExpectedData = {
     page: 1,
     total_results: 100,
@@ -50,6 +41,7 @@ describe('formatPopularMovieList()', () => {
       .toEqual({ ...defaultExpectedData, movies: [] })
   })
 
+  // Will throw error
   // it('should return movie list properly formatted', () => {
   //   expect(formatPopularMovieList({ ...defaultSentData, results: '123' })).toEqual({ ...defaultExpectedData, movies: [] })
   // })
@@ -78,43 +70,71 @@ describe('action creators', () => {
   })
 });
 
-describe('fetchPopularMovieList()', () => {
+describe('Actions that makes API requests', () => {
 
-  it('should call dispatch success action with appropriate data', () => {
-    mock.onGet('/movie/popular').reply(200, defaultSentData);
-    store.dispatch(fetchPopularMovieList()).then(() => {
-      expect(store.getActions()[0]).toEqual(fetchPopularMovieListRequest());
-      expect(store.getActions()[1]).toEqual(fetchPopularMovieListSuccess(formatPopularMovieList(defaultSentData)))
-    });
-  });
+  // mock axios instance
+  var mock = new MockAdapter(axios);
 
-  it('should call dispatch failure action with appropriate data', () => {
-    mock.onGet('/movie/popular').reply(400, { error: 'Test' });
-    store.dispatch(fetchPopularMovieList()).catch(() => {
-      expect(store.getActions()[0]).toEqual(fetchPopularMovieListRequest());
-      expect(store.getActions()[1]).toEqual(fetchPopularMovieListFailure({ error: 'Test' }))
+  // mock store
+  const middlewares = [thunk];
+  const mockStore = configureStore(middlewares);
+  const store = mockStore({});
+
+  beforeEach(() => {
+    mock.reset()
+    store.clearActions()
+  })
+
+  describe('fetchPopularMovieList()', () => {
+    it('should call dispatch success action with appropriate data', () => {
+      mock.onGet('/movie/popular').replyOnce(200, defaultSentData);
+      const expectedActions = [
+        fetchPopularMovieListRequest(),
+        fetchPopularMovieListSuccess(formatPopularMovieList(defaultSentData))
+      ];
+      store.dispatch(fetchPopularMovieList()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(mock.history.get[0].url).toBe('/movie/popular')
+      });
     });
-  });
+
+    it('should call dispatch failure action with appropriate data', () => {
+      mock.onGet('/movie/popular').replyOnce(400, { error: 'Test' });
+      const expectedActions = [
+        fetchPopularMovieListRequest(),
+        fetchPopularMovieListFailure({ error: 'Test' })
+      ];
+      store.dispatch(fetchPopularMovieList()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(mock.history.get[0].url).toBe('/movie/popular')
+      })
+    });
+  })
+
+  describe('searchMovies()', () => {
+    it('should call dispatch success action with appropriate data', () => {
+      mock.onGet('/search/movie', { query: 'test' }).replyOnce(200, defaultSentData);
+      const expectedActions = [
+        fetchPopularMovieListRequest(),
+        fetchPopularMovieListSuccess(formatPopularMovieList(defaultSentData))
+      ];
+      store.dispatch(searchMovies({ query: 'test' })).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('should call dispatch failure action with appropriate data', () => {
+      mock.onGet('/search/movie', { query: 'test' }).replyOnce(400, { error: 'Test' });
+      const expectedActions = [
+        fetchPopularMovieListRequest(),
+        fetchPopularMovieListFailure({ error: 'Test' })
+      ];
+      store.dispatch(searchMovies({ query: 'test' })).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  })
+
+
 
 })
-
-describe('searchMovies()', () => {
-
-  it('should call dispatch success action with appropriate data', () => {
-    mock.onGet('/search/movie', { query: 'test' }).reply(200, defaultSentData);
-    store.dispatch(searchMovies({ query: 'test' })).then(() => {
-      expect(store.getActions()[0]).toEqual(fetchPopularMovieListRequest());
-      expect(store.getActions()[1]).toEqual(fetchPopularMovieListSuccess(formatPopularMovieList(defaultSentData)))
-    });
-  });
-
-  it('should call dispatch failure action with appropriate data', () => {
-    mock.onGet('/search/movie', { query: 'test' }).reply(400, { error: 'Test' });
-    store.dispatch(searchMovies({ query: 'test' })).catch(() => {
-      expect(store.getActions()[0]).toEqual(fetchPopularMovieListRequest());
-      expect(store.getActions()[1]).toEqual(fetchPopularMovieListFailure({ error: 'Test' }))
-    });
-  });
-
-})
-

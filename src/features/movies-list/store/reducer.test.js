@@ -9,15 +9,16 @@ const popularMoviesExample = {
   movies: [fakeMovie()]
 }
 
+const action = {
+  type: MOVIE_LIST_ACTIONS.FETCH_POPULAR_MOVIES_SUCCESS,
+  payload: popularMoviesExample
+}
+
 it('Should return default state', () => {
   expect(reducer(undefined, { type: 'TEST_ACTION' })).toEqual(initialState);
 })
 
-it('Should store response and return appropriate state when for state undefined is passed', () => {
-  const action = {
-    type: MOVIE_LIST_ACTIONS.FETCH_POPULAR_MOVIES_SUCCESS,
-    payload: popularMoviesExample
-  }
+it('Should store response and return appropriate state when undefined is passed as default state', () => {
   const expected = {
     popularMovies: popularMoviesExample
   }
@@ -25,10 +26,6 @@ it('Should store response and return appropriate state when for state undefined 
 })
 
 it('Should store response and return appropriate state when default state is passed', () => {
-  const action = {
-    type: MOVIE_LIST_ACTIONS.FETCH_POPULAR_MOVIES_SUCCESS,
-    payload: popularMoviesExample
-  }
   const expected = {
     popularMovies: popularMoviesExample
   }

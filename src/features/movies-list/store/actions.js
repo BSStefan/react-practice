@@ -46,6 +46,7 @@ export const fetchPopularMovieList = () => (dispatch: Dispatch<MovieListActions>
     })
     .catch((error) => {
       dispatch(fetchPopularMovieListFailure(error.response.data));
+      return error;
     })
 }
 
@@ -59,5 +60,6 @@ export const searchMovies = (query: QuerySearch) => (dispatch: Dispatch<MovieLis
     })
     .catch((error) => {
       dispatch(fetchPopularMovieListFailure(error.response.data))
+      return error;
     })
 }
